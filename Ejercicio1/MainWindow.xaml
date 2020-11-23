@@ -1,0 +1,76 @@
+﻿<Window x:Class="Ejercicio1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ejercicio1"
+        mc:Ignorable="d"
+        
+        Title="Ejercicio Creador de memes" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="LightBlue"></Setter>
+        </Style>
+        <local:ConversorBorde x:Key="Conversor"></local:ConversorBorde>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >Texto Superior</TextBlock>
+        <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="1" x:Name="TextoSuperior" Text="Hola"></TextBox>
+        <TextBlock Grid.Row="1" VerticalAlignment="Center"  HorizontalAlignment="Center" >Texto Inferior</TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Margin="1" x:Name="TextoInferior"></TextBox>
+        <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" >Alto</TextBlock>
+        <Slider Minimum="100" Maximum="1000" Value="500" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Margin="1" x:Name="Alto"  ></Slider>
+        <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Ancho</TextBlock>
+        <Slider Minimum="100" Maximum="1000" Value="500" Grid.Column="4"  Grid.Row="3" VerticalAlignment="Center" Margin="1" x:Name="Ancho" ></Slider>
+        <TextBlock Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" >Imagen</TextBlock>
+        <TextBox Grid.Column="5" Grid.Row="4" VerticalAlignment="Center" Margin="1" x:Name="Imagen"></TextBox>
+        <TextBlock Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">Borde</TextBlock>
+        <CheckBox IsChecked="True"  Grid.Column="5" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="Borde" ></CheckBox>
+        <Border Grid.Row="6" Grid.Column="1" BorderBrush="Black" 
+                Height="{Binding ElementName=Alto, Path=Value}"
+                   Width="{Binding ElementName=Ancho,Path=Value}"
+                BorderThickness="{Binding ElementName=Borde,Path=IsChecked,Converter={StaticResource Conversor}}">
+            <Grid    HorizontalAlignment="Center" >
+
+
+                <Image Stretch="Fill" 
+                   
+                        Source="{Binding ElementName=Imagen,Path=Text}"></Image>
+
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Impact" FontSize="36"
+                       Text="{Binding ElementName=TextoSuperior,Path=Text}"
+                       >
+            </TextBlock>
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"   FontFamily="Impact" FontSize="36"
+                       Text="{Binding ElementName=TextoInferior,Path=Text}"
+                       >
+            </TextBlock>
+                
+
+
+        </Grid>
+        </Border>
+    </Grid>
+    </ScrollViewer>
+
+
+
+
+
+</Window>
